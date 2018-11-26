@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <body>
+ <!-- Anything applied form vue has to be in a div -->      
+<div id="app">
+  {{ message }}
+  <input type="text" v-model ="message">   <!-- view directive-->
+    <ul>
+        <li v-for = "todo in todos">{{ todo }}</li> <!-- To Do is one variable-->
+
+    </ul>
+    <button v-on:click="changeMessage">Click Meh!</button>       <!-- will change the value of message-->
+    <button v-on:click="increment">Increment</button>
+    <button v-on:click="decrement" v-if = "clicked >=0">Decrement</button>
+    <p><img v-bind:src="imgSrc">Clicked: {{ clicked }}</p>   <!-- clicked will be referenced -->
+    <p>Click Plus 5: {{ click5}}</p>    
+</div>
+    <script>  // Creating new instance of Vue which is a constructor
+      var app = new Vue
+      ({
+          el: "#app",    // creates a hook that links to id in div
+          data:     // object 
+          {
+            imgSrc: "smb.gif",  // All of these variables are referenced to the div!
+            clicked: 0,
+            click5: 0,
+            message: "Okay!",     
+            todos: ["learn HTML", "Learn JS", "Learn Vue","Finish Project"] 
+          },
+          methods:      // this is refrenced in Div
+          {
+              changeMessage()
+              {
+                this.message = "I got Vued from the button";
+              },
+              increment() 
+              {
+                  this.clicked++;
+                  this.click5 += 10;
+              },
+              decrement()
+              {
+                  this.clicked--;
+                  this.click5 -=10;
+              }
+              
+          }
+      });
+
+        </script>
+    </body>
+</html>
+
+<!-- Whole point of Vue is to reference variables inside of Objects -->
